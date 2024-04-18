@@ -29,7 +29,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		
 		String jwt = request.getHeader("Authorization");
 		
-		System.out.println("JWT = " + jwt);
+		// System.out.println("JWT = " + jwt);
 		
 		if (jwt == null || !jwt.startsWith(SecParams.PREFIX)) {
 			filterChain.doFilter(request, response);

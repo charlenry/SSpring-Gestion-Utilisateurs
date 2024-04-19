@@ -3,12 +3,12 @@ package com.charlenry.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import com.charlenry.users.entities.Role;
-import com.charlenry.users.entities.User;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import com.charlenry.users.entities.Role;
+//import com.charlenry.users.entities.User;
 import com.charlenry.users.service.UserService;
-import jakarta.annotation.PostConstruct;
+//import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
 public class UsersMicroserviceApplication {

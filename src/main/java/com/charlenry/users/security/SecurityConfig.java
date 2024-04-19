@@ -16,12 +16,25 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * Cette une classe utilisée pour configurer Spring Security dans l'application.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	@Autowired
 	AuthenticationManager authMgr;
 	
+	/** 
+	 * Cette méthode est utilisée pour configurer la chaîne de filtres de sécurité de Spring Security.
+	 * Une chaîne de filtres est une liste ordonnée de filtres qui sont appliqués à chaque requête entrante. 
+	 * Chaque filtre dans la chaîne peut décider de traiter la requête et de générer une réponse, 
+	 * ou de passer la requête au filtre suivant dans la chaîne.
+	 * 
+	 * @param http - Objet de la classe HttpSecurity fournie par Spring Security et est utilisé pour configurer les détails de sécurité au niveau des requêtes HTTP.
+	 * @return SecurityFilterChain - C'est une interface fournie par Spring Security qui représente une chaîne de filtres de sécurité.
+	 * @throws Exception
+	 */
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -1,0 +1,6 @@
+com.charlenry.users
+com.charlenry.users.entities
+com.charlenry.users.repos
+com.charlenry.users.restControllers
+com.charlenry.users.security
+com.charlenry.users.service

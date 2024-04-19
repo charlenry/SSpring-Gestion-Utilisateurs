@@ -24,16 +24,40 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+/**
+ * Cette classe est une extension de la classe UsernamePasswordAuthenticationFilter 
+ * qui est une classe intégrée de Spring Security.
+ * Dans ce cas, JWTAuthenticationFilter est une sous-classe de UsernamePasswordAuthenticationFilter.
+ * Cela signifie que JWTAuthenticationFilter hérite de toutes les méthodes et variables publiques et protégées de UsernamePasswordAuthenticationFilter.
+ * La classe UsernamePasswordAuthenticationFilter est une implémentation spécifique d'un filtre d'authentification qui est utilisé pour traiter les demandes d'authentification par nom d'utilisateur et mot de passe.
+ * En étendant cette classe, JWTAuthenticationFilter peut ajouter ou modifier le comportement de cette classe pour gérer l'authentification JWT (JSON Web Token).
+ * En résumé, cette classe est utilisée pour personnaliser le processus d'authentification dans une application Spring Security en utilisant des JWT.
+ */
+ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	
 	private AuthenticationManager authenticationManager;
 
+	/**
+	 * Définit le constructeur de la classe JWTAuthenticationFilter
+	 * 
+	 * @param authenticationManager - Objet utilisé pour gérer l'authentification
+	 */
 	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
 		super();
 		this.authenticationManager = authenticationManager;
 	}
 
-	// Extrait l'utilisateur user à partir de la requête HTTP
+	
+	/** 
+	 * Tente d'authentifier une requête HTTP dans le cadre de Spring Security.
+	 * Si l'authenficication réussit, retourne un objet Authentication. 
+	 * Sinon lance AuthenticationException.
+	 * 
+	 * @param request - Requête HTTP
+	 * @param response - Réponse HTTP
+	 * @return Authentication - Contient les informations d'authentification d'un utilisateur.
+	 * @throws AuthenticationException
+	 */
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
@@ -54,9 +78,20 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 	}
 
+	
+	/** 
+	 * Crée le token JWT en cas de succès d'authentification et le met dans la réponse HTTP.
+	 * 
+	 * @param request - Requête HTTP
+	 * @param response - Réponse HTTP
+	 * @param filterChain - Chaîne de filtres qui peut être appliquée à la requête et à la réponse.
+	 * @param authResult - Objet contenant les détails de l'authentification réussie.
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, 
-			FilterChain chain, Authentication authResult) throws IOException, ServletException {
+			FilterChain filterChain, Authentication authResult) throws IOException, ServletException {
 		
 		org.springframework.security.core.userdetails.User springUser = 
 				(org.springframework.security.core.userdetails.User) authResult.getPrincipal();
@@ -74,8 +109,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		response.addHeader("Authorization", jwt);
 				
 	}
-	
-	
 	
 	
 }

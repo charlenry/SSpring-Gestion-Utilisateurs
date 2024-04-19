@@ -5,6 +5,7 @@ import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -52,14 +53,12 @@ public class SecurityConfig {
 		}))
 
 		.authorizeHttpRequests(requests -> requests
-			.requestMatchers("/login").permitAll()
-			.requestMatchers("/all").hasAuthority("ADMIN")
+			.requestMatchers(HttpMethod.POST, "/login").permitAll()
+			.requestMatchers(HttpMethod.GET, "/all").hasAuthority("ADMIN")
 			.anyRequest().authenticated()
 		)
-		.addFilterBefore(new JWTAuthenticationFilter (authMgr), 
-				UsernamePasswordAuthenticationFilter.class)
-		.addFilterBefore(new JWTAuthorizationFilter(), 
-				UsernamePasswordAuthenticationFilter.class);
+		.addFilterBefore(new JWTAuthenticationFilter (authMgr), UsernamePasswordAuthenticationFilter.class)
+		.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 		
 		return http.build();
 	}

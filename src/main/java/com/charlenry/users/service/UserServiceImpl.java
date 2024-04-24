@@ -1,6 +1,8 @@
 package com.charlenry.users.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +12,9 @@ import com.charlenry.users.entities.Role;
 import com.charlenry.users.entities.User;
 import com.charlenry.users.repos.RoleRepository;
 import com.charlenry.users.repos.UserRepository;
+import com.charlenry.users.service.exceptions.EmailAlreadyExistsException;
+import com.charlenry.users.service.register.RegistrationRequest;
+
 import jakarta.transaction.Transactional;
 
 
@@ -58,6 +63,33 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAllUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public User registerUser(RegistrationRequest request) {
+		// Recherche un utilisateur par son email
+		Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
+		
+		// Si l'utilisateur est déjà présent dans la BDD, renvoie une exception
+		if(optionalUser.isPresent()) throw new EmailAlreadyExistsException("Email déjà existant !");
+		
+		// Récupère les données du nouvel utilisateur
+		User newUser = new User();
+		newUser.setUsername(request.getUsername());
+		newUser.setEmail(request.getEmail());
+		newUser.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
+		newUser.setEnabled(false); // Le compte de l'utilisateur est désactivé par défaut
+		
+		// Sauvegarde le nouvel utilisateur dans la table users
+		userRepository.save(newUser);
+		
+		// Ajoute le role USER par défaut au nouvel utilisateur
+		Role role = roleRepository.findByRole("USER");
+		List<Role> roles = new ArrayList<>();
+		roles.add(role);
+		newUser.setRoles(roles);		
+		
+		return userRepository.save(newUser);
 	}
 
 }

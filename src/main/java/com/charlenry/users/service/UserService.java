@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.charlenry.users.entities.Role;
 import com.charlenry.users.entities.User;
+import com.charlenry.users.service.register.RegistrationRequest;
 
 public interface UserService {
 	User saveUser(User user);
@@ -11,4 +12,7 @@ public interface UserService {
 	Role addRole(Role role);
 	User addRoleToUser(String username, String rolename);
 	List<User> findAllUsers();
+	
+	// Inscrire un nouvel utilisateur
+	User registerUser(RegistrationRequest request);
 }

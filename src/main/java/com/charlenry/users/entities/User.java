@@ -27,6 +27,7 @@ public class User {
 	private String username;
 	private String password;
 	private Boolean enabled;
+	private String email;
 	
 	// Un User peut avoir plusieurs rôles et un rôle peut appartenir à plusieurs Users
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

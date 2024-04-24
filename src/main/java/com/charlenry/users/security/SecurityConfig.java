@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,6 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)  // Permet d'ajouter des filtres directement dans les restControllers ou au niveau des méthodes de service.
 public class SecurityConfig {
 	@Autowired
 	AuthenticationManager authMgr;
@@ -51,9 +53,8 @@ public class SecurityConfig {
 				return cors;
 			}
 		}))
-
 		.authorizeHttpRequests(requests -> requests
-			.requestMatchers(HttpMethod.POST, "/login").permitAll()
+			.requestMatchers(HttpMethod.POST, "/login", "/register/**").permitAll()
 			.requestMatchers(HttpMethod.GET, "/all").hasAuthority("ADMIN")
 			.anyRequest().authenticated()
 		)

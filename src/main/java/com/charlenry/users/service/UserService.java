@@ -15,4 +15,11 @@ public interface UserService {
 	
 	// Inscrire un nouvel utilisateur
 	User registerUser(RegistrationRequest request);
+	
+	// Envoie un email à l'utilisateur après inscription pour valider l'adresse email
+	public void sendEmailUser(User u, String code);
+	
+	// Valide le token saisi par l'utilisateur
+	public User validateToken(String code);
+	
 }

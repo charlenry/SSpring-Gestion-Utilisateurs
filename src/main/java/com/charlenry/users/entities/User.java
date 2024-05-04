@@ -42,11 +42,11 @@ public class User {
 	private Boolean enabled;
 	private String email;
 	
-	// Un User peut avoir plusieurs rôles et un rôle peut appartenir à plusieurs Users
+	// Chaque User peut avoir plusieurs rôles et un rôle peut appartenir à plusieurs Users
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
  /**
-	* The `@JoinTable` annotation in the `User` entity class is used to define the mapping for a Many-to-Many relationship between the `User` entity and the `Role` entity.
-	* 
+	* The `@JoinTable` annotation in the `User` entity class is used to define the mapping for 
+	* a Many-to-Many relationship between the `User` entity and the `Role` entity.
 	*/
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;

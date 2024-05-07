@@ -9,13 +9,14 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-@Service
+
 /**
  * The line `public class EmailService implements EmailSender` is defining a class named `EmailService` that implements 
  * the `EmailSender` interface. This means that the `EmailService` class must provide an implementation for all the 
  * methods defined in the `EmailSender` interface.
  */
+@AllArgsConstructor
+@Service
 public class EmailService implements EmailSender {
 	
 	private final JavaMailSender mailSender;

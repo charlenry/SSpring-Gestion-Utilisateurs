@@ -19,16 +19,16 @@ Pour que l'application fonctionne correctement, il faut exécuter le serveur de 
 1. Téléchargez et installez le logiciel [XAMPP](https://www.apachefriends.org/fr/download.html),
 2. Lancez le serveur Apache et le serveur MySQL,
 3. Dans la console `XAMPP Control Panel`, cliquez sur le bouton `Admin` de MySQL pour accéder à l'interface de gestion des bases de données,
-4. Créez deux bases de données nommées respectivement `spring_produits_db` et `spring_users_iam_db`. Puis importez les tables à partir des fichiers `spring_produits_db.sql` et `spring_produits_db.sql` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits).
+4. Créez deux bases de données nommées respectivement `spring_produits_db` et `spring_users_iam_db`. Puis importez les tables à partir des fichiers `spring_produits_db.sql` et `spring_users_iam_db.sql` à télécharger depuis [GitHub](https://github.com/charlenry/Annexe-Gestion-Produits).
 
 
 ### Partie backend métier
-1. Si vous utilisez `Spring Tool Suite` , importez le projet [spring-gestion-produits](https://github.com/charlenry/Spring-Gestion-Produits) à partir Git, fournissez l'URL du dépôt du projet et choisissez la branche `main` pour le faire fonctionner avec le projet [spring-gestion-utilisateurs](https://github.com/charlenry/Spring-Gestion-Utilisateurs). Sinon, choisissez la branche `secured_apis_with_keycloak_oauth2` pour le faire fonctionner avec [Keycloak](https://www.keycloak.org/downloads).
+1. Si vous utilisez `Spring Tool Suite` , importez le projet [spring-gestion-produits](https://github.com/charlenry/Spring-Gestion-Produits) à partir Git, fournissez l'URL du dépôt du projet et choisissez la branche `main` pour le faire fonctionner avec le projet [spring-gestion-utilisateurs](https://github.com/charlenry/Spring-Gestion-Utilisateurs). Sinon, choisissez la branche `secured_apis_with_keycloak_oauth2` pour le faire fonctionner avec [Keycloak](https://www.keycloak.org/downloads). Si vous utilisez VSCode, clonez le projet, puis choisissez la branche `main` ou `secured_apis_with_keycloak_oauth2` selon votre choix.
 2. Lancez le projet en tant qu'application Spring Boot. L'application sera accessible à l'adresse `http://localhost:8080`.
 
 
 ### Partie backend IAM
-1. Si vous utilisez `Spring Tool Suite`, importez le projet [spring-gestion-utilisateurs](https://github.com/charlenry/Spring-Gestion-Utilisateurs) à partir Git, fournissez l'URL du dépôt du projet et choisissez la branche `main`.
+1. Si vous utilisez `Spring Tool Suite`, importez le projet [spring-gestion-utilisateurs](https://github.com/charlenry/Spring-Gestion-Utilisateurs) à partir Git, fournissez l'URL du dépôt du projet et choisissez la branche `main`. Si vous utilisez VSCode, clonez le projet et choisissez la branche `main`.
 2. Lancez le projet en tant qu'application Spring Boot. L'application sera accessible à l'adresse `http://localhost:8081`.
 
 
